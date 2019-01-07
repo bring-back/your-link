@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class YourLink {
     private String url;
-    private boolean isRed;
+    private boolean read;
 
     public YourLink(String url) {
         this.url = url;
