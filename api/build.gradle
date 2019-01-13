@@ -39,6 +39,7 @@ repositories {
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-webflux'
+    compile "io.projectreactor.kafka:reactor-kafka:1.1.0.RELEASE"
 
     apt 'org.projectlombok:lombok:1.18.4'
     compileOnly 'org.projectlombok:lombok:1.18.4'
