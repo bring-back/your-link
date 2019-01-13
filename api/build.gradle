@@ -37,6 +37,8 @@ repositories {
     mavenCentral()
 }
 
+mainClassName = 'com.bringback.yourlink.api.ApiApplication'
+
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-webflux'
 
