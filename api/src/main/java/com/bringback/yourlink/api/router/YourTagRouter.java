@@ -1,6 +1,6 @@
 package com.bringback.yourlink.api.router;
 
-import com.bringback.yourlink.api.handler.YourLinkHandler;
+import com.bringback.yourlink.api.handler.YourTagHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -12,19 +12,19 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Component
-public class YourLinkRouter {
+public class YourTagRouter {
 
-    private final YourLinkHandler yourLinkHandler;
+    private final YourTagHandler yourTagHandler;
 
     @Autowired
-    public YourLinkRouter(YourLinkHandler yourLinkHandler) {
-        this.yourLinkHandler = yourLinkHandler;
+    public YourTagRouter(YourTagHandler yourTagHandler) {
+        this.yourTagHandler = yourTagHandler;
     }
 
-    public RouterFunction<ServerResponse> routeYourLink() {
+    public RouterFunction<ServerResponse> routeYourTag() {
         return route(RequestPredicates
-                        .GET("/your/links")
+                        .GET("/your/tags")
                         .and(accept(MediaType.APPLICATION_JSON)),
-                yourLinkHandler::getYourLinks);
+                yourTagHandler::getYourTags);
     }
 }

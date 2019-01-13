@@ -1,0 +1,3 @@
+language: java
+notifications:
+  slack: bring-back:u8c53w9twh3F3ftLz40niYBs
