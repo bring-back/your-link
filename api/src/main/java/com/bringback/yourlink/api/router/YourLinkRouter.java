@@ -1,6 +1,8 @@
 package com.bringback.yourlink.api.router;
 
-import com.bringback.yourlink.api.handler.YourLinkHandler;
+import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -8,8 +10,7 @@ import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
-import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+import com.bringback.yourlink.api.handler.YourLinkHandler;
 
 @Component
 public class YourLinkRouter {

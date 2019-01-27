@@ -1,11 +1,9 @@
-package com.bringback.yourlink.api.serializers;
+package com.bringback.yourlink.api.kafka.serializers;
 
 import java.util.Map;
 
 import org.apache.kafka.common.serialization.Serializer;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 
 public class LinkSerializer implements Serializer {
 

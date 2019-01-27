@@ -1,8 +1,3 @@
 spring:
   profiles:
     active: local
-  mvc:
-    static-path-pattern: /resources/**
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp

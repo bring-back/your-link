@@ -2,22 +2,29 @@ package com.bringback.yourlink.api.handler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import com.bringback.yourlink.api.kafka.SampleProducer;
+import com.bringback.yourlink.api.kafka.LinkConsumer;
+import com.bringback.yourlink.api.kafka.LinkProducer;
 import com.bringback.yourlink.api.model.Link;
-import com.bringback.yourlink.api.model.YourLink;
 
+import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
 public class LinkHandler {
+
+  @Autowired
+  private LinkProducer linkProducer;
+
+  @Autowired
+  private LinkConsumer linkConsumer;
 
   public Mono<ServerResponse> saveLink(ServerRequest request) {
     List<Link> dummyLinkList = new ArrayList<>();
@@ -35,22 +42,17 @@ public class LinkHandler {
 
     dummyLinkList.add(link);
 
-    Flux<String> linkFlux = Flux.just("Success");
+    // produce
+    linkProducer.sendMessages(dummyLinkList.size(), dummyLinkList);
 
-    SampleProducer producer = new SampleProducer("localhost:9092");
+    // consume
+    Disposable disposable = linkConsumer.consumeMessages(dummyLinkList.size());
+    disposable.dispose();
 
-    String TOPIC = "test-your-link";
-    CountDownLatch latch = new CountDownLatch(1);
+    Flux<Link> linkFlux = Flux.fromIterable(dummyLinkList);
 
-    try {
-      producer.sendMessages(TOPIC, 1, latch);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
-    return ServerResponse
-      .ok()
-      .contentType(MediaType.APPLICATION_JSON)
-      .body(linkFlux, String.class);
+    return ServerResponse.ok()
+                         .contentType(MediaType.APPLICATION_JSON)
+                         .body(linkFlux, Link.class);
   }
 }
