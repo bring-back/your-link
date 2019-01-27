@@ -39,8 +39,13 @@ repositories {
 
 mainClassName = 'com.bringback.yourlink.api.ApiApplication'
 
+def elasticSearchVersion = '6.5.4'
+
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-webflux'
+
+    compile 'org.elasticsearch:elasticsearch:' + elasticSearchVersion
+    compile 'org.elasticsearch.client:elasticsearch-rest-high-level-client:' + elasticSearchVersion
 
     apt 'org.projectlombok:lombok:1.18.4'
     compileOnly 'org.projectlombok:lombok:1.18.4'
