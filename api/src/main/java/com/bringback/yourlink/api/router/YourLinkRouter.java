@@ -22,9 +22,7 @@ public class YourLinkRouter {
     }
 
     public RouterFunction<ServerResponse> routeYourLink() {
-        return route(RequestPredicates
-                        .GET("/your/links")
-                        .and(accept(MediaType.APPLICATION_JSON)),
-                yourLinkHandler::getYourLinks);
+        return route(RequestPredicates.GET("/your/links").and(accept(MediaType.APPLICATION_JSON)), yourLinkHandler::getYourLinks)
+                .andRoute(RequestPredicates.POST("/your/link/save").and(accept(MediaType.APPLICATION_JSON)), yourLinkHandler::saveYourLink);
     }
 }

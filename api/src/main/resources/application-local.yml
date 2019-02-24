@@ -1,0 +1,4 @@
+elasticsearch:
+  hosts:
+    - localhost:9200
+    - localhost:9201
